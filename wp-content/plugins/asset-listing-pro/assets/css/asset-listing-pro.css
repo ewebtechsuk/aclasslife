@@ -155,3 +155,48 @@
     background-color: #006799;
     color: #ffffff;
 }
+/* --- Single AClassLife Listing (CPT) --- */
+.container{max-width:1200px;margin:0 auto;padding:clamp(16px,3vw,28px)}
+.alp-single-listing{--c-border:#e7e7ea;--c-muted:#6b7280;--c-bg:#fff;--c-ink:#0f172a}
+.alp-breadcrumbs{font-size:.9rem;color:var(--c-muted);display:flex;gap:.5rem;margin-bottom:.75rem}
+.alp-breadcrumbs a{text-decoration:none;color:inherit}
+.alp-title{font-size:clamp(1.75rem,3.4vw,2.5rem);line-height:1.1;margin:.25rem 0 .75rem;color:var(--c-ink)}
+.alp-hero-meta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.alp-price{font-weight:700;font-size:clamp(1.25rem,2.4vw,1.75rem)}
+.alp-location{color:var(--c-muted)}
+.alp-badge{background:#eef2ff;color:#3730a3;padding:.25rem .6rem;border-radius:999px;font-size:.8rem}
+.alp-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.alp-cta-row{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.alp-btn-outline,.alp-btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1rem;border-radius:.75rem;border:1px solid var(--c-border);text-decoration:none;color:var(--c-ink);background:#fff}
+.alp-btn-secondary{background:#111827;color:#fff;border-color:#111827}
+.alp-media-featured img{width:100%;height:auto;border-radius:1rem}
+.alp-media-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+.alp-media-grid a{display:block;border-radius:12px;overflow:hidden}
+.alp-media-grid a:first-child{grid-column:span 12}
+@media (min-width:900px){.alp-media-grid a:first-child{grid-column:span 8}.alp-media-grid a{grid-column:span 4}}
+.alp-keyfacts{display:grid;gap:18px;margin-top:18px}
+@media (min-width:980px){.alp-keyfacts{grid-template-columns:1fr 320px}}
+.alp-card{background:var(--c-bg);border:1px solid var(--c-border);border-radius:14px;padding:16px}
+.alp-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:680px){.alp-facts{grid-template-columns:repeat(3,1fr)}}
+.alp-facts li{display:flex;justify-content:space-between;gap:10px;padding:10px;border:1px dashed #eef;border-radius:10px;background:#fafafa}
+.alp-facts span{color:var(--c-muted)}
+.alp-sticky-cta{position:sticky;top:14px;display:flex;flex-direction:column;gap:10px}
+.alp-sticky-price{font-size:1.25rem;font-weight:700}
+.alp-content{display:grid;gap:24px;margin-top:22px}
+@media (min-width:980px){.alp-content{grid-template-columns:minmax(0,1fr) 360px}}
+.alp-main h2{margin:1.25rem 0 .5rem}
+.alp-features{columns:2;gap:18px}
+.alp-features li{break-inside:avoid;padding:6px 0;border-bottom:1px dotted var(--c-border)}
+.alp-map iframe{border:0;border-radius:12px}
+.alp-agent .alp-agent-row{display:flex;gap:12px;align-items:center}
+.alp-agent-name{font-weight:600}
+.alp-related{margin-top:26px}
+.alp-related-grid{display:grid;gap:14px}
+@media (min-width:900px){.alp-related-grid{grid-template-columns:repeat(3,1fr)}}
+.alp-related-card{border:1px solid var(--c-border);border-radius:14px;overflow:hidden;background:#fff}
+.alp-related-card .alp-thumb img{width:100%;height:210px;object-fit:cover}
+.alp-related-card h3{font-size:1.05rem;margin:.6rem .8rem}
+.alp-related-meta{display:flex;justify-content:space-between;color:var(--c-muted);font-size:.9rem;margin:0 .8rem 1rem}
+.alp-book .wpcf7 form{display:grid;gap:10px}
+
