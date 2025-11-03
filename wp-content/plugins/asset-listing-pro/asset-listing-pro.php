@@ -28,6 +28,7 @@ if ( ! defined( 'ALP_PLUGIN_URL' ) ) {
 
 require_once ALP_PLUGIN_DIR . 'includes/cpt-listing.php';
 require_once ALP_PLUGIN_DIR . 'includes/frontend-submission.php';
+require_once ALP_PLUGIN_DIR . 'includes/class-alp-dummy-data.php';
 
 /**
  * Core plugin bootstrap for hooks and shared functionality.
@@ -514,7 +515,10 @@ class Asset_Listing_Pro {
     }
 }
 
+register_activation_hook( __FILE__, array( 'ALP_Dummy_Data', 'activate' ) );
+
 new Asset_Listing_Pro();
 
 // Frontend utilities.
 ACL_Listing_Submission::get_instance();
+ALP_Dummy_Data::init();
