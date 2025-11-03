@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Jet submission fields</title>
+  <desc id="desc">Overview of the aircraft model and hours flown inputs shown for jet listings.</desc>
+  <rect width="960" height="540" fill="#0f172a" rx="16" />
+  <text x="50%" y="32%" text-anchor="middle" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="44">Jet Submission Fields</text>
+  <text x="50%" y="50%" text-anchor="middle" fill="#cbd5f5" font-family="Arial, Helvetica, sans-serif" font-size="26">Aircraft Model · Hours Flown</text>
+  <text x="50%" y="66%" text-anchor="middle" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="22">Sellers must complete both values before submitting.</text>
+</svg>

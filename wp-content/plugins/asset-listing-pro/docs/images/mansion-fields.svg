@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Mansion submission fields</title>
+  <desc id="desc">Overview of the property style input displayed for mansion listings.</desc>
+  <rect width="960" height="540" fill="#3b0764" rx="16" />
+  <text x="50%" y="32%" text-anchor="middle" fill="#f5f3ff" font-family="Arial, Helvetica, sans-serif" font-size="44">Mansion Submission Fields</text>
+  <text x="50%" y="52%" text-anchor="middle" fill="#ddd6fe" font-family="Arial, Helvetica, sans-serif" font-size="26">Property Style / Model</text>
+  <text x="50%" y="68%" text-anchor="middle" fill="#c4b5fd" font-family="Arial, Helvetica, sans-serif" font-size="22">Describe the architectural character buyers can expect.</text>
+</svg>
