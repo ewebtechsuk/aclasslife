@@ -96,6 +96,7 @@ class ALP_Dummy_Data {
             'type'        => 'Jet',
             'price'       => 0,
             'location'    => '',
+            'image'       => '',
             'specs'       => array(),
             'description' => '',
         );
@@ -152,6 +153,50 @@ class ALP_Dummy_Data {
         update_post_meta( $post_id, '_acl_specifications', self::format_specifications( $listing['specs'] ) );
         update_post_meta( $post_id, '_acl_commission_status', 'unpaid' );
 
+        if ( ! empty( $listing['image'] ) ) {
+            self::assign_featured_image_from_url( $post_id, $listing['image'] );
+        }
+
+    }
+
+    /**
+     * Download an external image and assign it as the featured image for the listing.
+     *
+     * @param int    $post_id   Listing post ID.
+     * @param string $image_url Remote image URL.
+     * @return void
+     */
+    private static function assign_featured_image_from_url( $post_id, $image_url ) {
+        $image_url = esc_url_raw( $image_url );
+
+        if ( empty( $image_url ) ) {
+            return;
+        }
+
+        $stored_source = get_post_meta( $post_id, '_alp_listing_featured_image_source', true );
+        $thumbnail_id  = get_post_thumbnail_id( $post_id );
+
+        if ( $thumbnail_id && $stored_source === $image_url ) {
+            return;
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        require_once ABSPATH . 'wp-admin/includes/post.php';
+
+        $attachment_id = media_sideload_image( $image_url, $post_id, null, 'id' );
+
+        if ( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+            return;
+        }
+
+        if ( $thumbnail_id && (int) $thumbnail_id !== (int) $attachment_id ) {
+            wp_delete_attachment( $thumbnail_id, true );
+        }
+
+        set_post_thumbnail( $post_id, $attachment_id );
+        update_post_meta( $post_id, '_alp_listing_featured_image_source', $image_url );
     }
 
     /**
@@ -224,6 +269,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 65000000,
                 'location' => 'London, United Kingdom',
+                'image'    => 'https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -248,6 +294,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 72000000,
                 'location' => 'Montreal, Canada',
+                'image'    => 'https://images.unsplash.com/photo-1625513123245-fcb02d69ad12?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -272,6 +319,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 59000000,
                 'location' => 'Paris, France',
+                'image'    => 'https://images.unsplash.com/photo-1619659085985-f51a00f0160a?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -296,6 +344,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 48000000,
                 'location' => 'São Paulo, Brazil',
+                'image'    => 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -320,6 +369,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 28000000,
                 'location' => 'Wichita, United States',
+                'image'    => 'https://images.unsplash.com/photo-1661954864180-e61dea14208a?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -344,6 +394,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 125000000,
                 'location' => 'Dubai, United Arab Emirates',
+                'image'    => 'https://images.unsplash.com/photo-1619652116813-98504fce82d2?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -368,6 +419,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Jet',
                 'price'    => 7800000,
                 'location' => 'Tokyo, Japan',
+                'image'    => 'https://images.unsplash.com/photo-1616193572425-fd11332ec645?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Model',
@@ -394,6 +446,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 115000000,
                 'location' => 'Monaco, Monaco',
+                'image'    => 'https://images.unsplash.com/photo-1523496922380-91d5afba98a3?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -418,6 +471,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 92000000,
                 'location' => 'Amsterdam, Netherlands',
+                'image'    => 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -442,6 +496,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 65000000,
                 'location' => 'Genoa, Italy',
+                'image'    => 'https://images.unsplash.com/photo-1559385301-0187cb6eff46?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -466,6 +521,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 98000000,
                 'location' => 'Dubai, United Arab Emirates',
+                'image'    => 'https://images.unsplash.com/photo-1616207133639-cd5e4db9859f?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -490,6 +546,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 34000000,
                 'location' => 'Southampton, United Kingdom',
+                'image'    => 'https://images.unsplash.com/photo-1614350391736-ed8619d63c06?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -514,6 +571,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 48000000,
                 'location' => 'Nice, France',
+                'image'    => 'https://images.unsplash.com/photo-1655286029136-95a47d455999?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -538,6 +596,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Yacht',
                 'price'    => 7800000,
                 'location' => 'Barcelona, Spain',
+                'image'    => 'https://images.unsplash.com/photo-1562281302-809108fd533c?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Length',
@@ -564,6 +623,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 150000000,
                 'location' => 'Los Angeles, United States',
+                'image'    => 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
@@ -588,6 +648,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 82000000,
                 'location' => 'London, United Kingdom',
+                'image'    => 'https://images.unsplash.com/photo-1416331108676-a22ccb276e35?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
@@ -612,6 +673,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 45000000,
                 'location' => 'Dubai, United Arab Emirates',
+                'image'    => 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
@@ -636,6 +698,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 38000000,
                 'location' => 'Sentosa, Singapore',
+                'image'    => 'https://images.unsplash.com/photo-1505843795480-5cfb3c03f6ff?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
@@ -660,6 +723,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 27000000,
                 'location' => 'Sydney, Australia',
+                'image'    => 'https://images.unsplash.com/photo-1593714604578-d9e41b00c6c6?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
@@ -684,6 +748,7 @@ class ALP_Dummy_Data {
                 'type'     => 'Mansion',
                 'price'    => 56000000,
                 'location' => 'Como, Italy',
+                'image'    => 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80',
                 'specs'    => array(
                     array(
                         'label' => 'Size',
