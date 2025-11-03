@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Asset Listing Pro
  * Description: Provides asset listing management, submissions, and commission tracking.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: AClassLife
  * Text Domain: asset-listing-pro
  * Domain Path: /languages
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'ALP_PLUGIN_VERSION' ) ) {
-    define( 'ALP_PLUGIN_VERSION', '1.0.0' );
+    define( 'ALP_PLUGIN_VERSION', '1.1.0' );
 }
 
 if ( ! defined( 'ALP_PLUGIN_DIR' ) ) {

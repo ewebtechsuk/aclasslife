@@ -29,6 +29,45 @@
     margin-bottom: 1rem;
 }
 
+.alp-asset-type-fields {
+    margin: 1.5rem 0;
+}
+
+.alp-asset-fields {
+    background: #f9fafb;
+    border: 1px dashed #c3c4c7;
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.alp-asset-fields__title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.alp-asset-fields__description {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.alp-asset-type-fields__notice {
+    font-size: 0.9rem;
+    color: #b91c1c;
+    margin: 1rem 0 1.5rem;
+}
+
+.alp-submission-form.alp-has-js .alp-asset-fields {
+    display: none;
+}
+
+.alp-submission-form.alp-has-js .alp-asset-fields.is-active {
+    display: block;
+}
+
 .alp-button {
     background-color: #0073aa;
     color: #ffffff;

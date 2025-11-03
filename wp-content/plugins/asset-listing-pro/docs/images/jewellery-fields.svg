@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Jewellery submission fields</title>
+  <desc id="desc">Summary of the gemstone and carat weight inputs displayed for jewellery listings.</desc>
+  <rect width="960" height="540" fill="#831843" rx="16" />
+  <text x="50%" y="32%" text-anchor="middle" fill="#fff1f2" font-family="Arial, Helvetica, sans-serif" font-size="44">Jewellery Submission Fields</text>
+  <text x="50%" y="50%" text-anchor="middle" fill="#fecdd3" font-family="Arial, Helvetica, sans-serif" font-size="26">Primary Gemstone · Carat Weight</text>
+  <text x="50%" y="67%" text-anchor="middle" fill="#ffe4e6" font-family="Arial, Helvetica, sans-serif" font-size="22">Ensure both values reflect lab certificates where available.</text>
+</svg>

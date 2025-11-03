@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Yacht submission fields</title>
+  <desc id="desc">Summary of vessel model and length fields surfaced for yacht listings.</desc>
+  <rect width="960" height="540" fill="#0b3d91" rx="16" />
+  <text x="50%" y="32%" text-anchor="middle" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="44">Yacht Submission Fields</text>
+  <text x="50%" y="50%" text-anchor="middle" fill="#bfdbfe" font-family="Arial, Helvetica, sans-serif" font-size="26">Vessel Model · Length (ft)</text>
+  <text x="50%" y="66%" text-anchor="middle" fill="#e2e8f0" font-family="Arial, Helvetica, sans-serif" font-size="22">Both inputs are mandatory for yachts.</text>
+</svg>

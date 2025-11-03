@@ -30,6 +30,38 @@ Asset types help buyers filter listings.
 - The form captures title, description, price, location, specifications, and an optional image.
 - Submitted listings are stored with a *Pending* status awaiting review.
 
+### Asset-Type Specific Fields
+
+When sellers choose an asset type, additional required fields are revealed. Ensure sellers understand the information needed for each category:
+
+#### Jets
+
+- Enter the aircraft model and the total hours flown.
+- These values populate the `_acl_listing_model` and `_acl_listing_hours` meta keys for downstream systems.
+
+![Jet submission fields](docs/images/jet-fields.svg)
+
+#### Yachts
+
+- Provide the vessel model and its overall length in feet.
+- The details are stored in `_acl_listing_model` and `_acl_listing_length`.
+
+![Yacht submission fields](docs/images/yacht-fields.svg)
+
+#### Mansions
+
+- Supply the architectural style or model name for the property to help buyers identify the listing.
+- The value feeds into `_acl_listing_model`.
+
+![Mansion submission fields](docs/images/mansion-fields.svg)
+
+#### Jewellery
+
+- Capture the primary gemstone and total carat weight.
+- These responses map to `_acl_listing_gemstone` and `_acl_listing_carats`.
+
+![Jewellery submission fields](docs/images/jewellery-fields.svg)
+
 ## 4. Reviewing Listings
 
 1. Go to **Asset Listings → Asset Listings**.

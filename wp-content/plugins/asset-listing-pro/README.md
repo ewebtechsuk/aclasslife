@@ -10,6 +10,7 @@ Asset Listing Pro provides a complete workflow for capturing asset listings from
 - **Seller Dashboard** &mdash; Sellers can review listing statuses and commission progress via `[acl_seller_dashboard]`.
 - **Admin Oversight** &mdash; Custom dashboard pages summarize listing metrics and provide commission workflows for managers.
 - **Meta Fields** &mdash; Capture price, location, and specification details stored as dedicated meta fields.
+- **Asset-Type Specific Fields** &mdash; Tailor jets, yachts, mansions, and jewellery submissions with model, hours flown, vessel length, gemstone, and carat data.
 - **Media Handling** &mdash; Support for featured image uploads with WordPress media management.
 - **Internationalization** &mdash; Translation ready with a starter POT file.
 - **Asset Pipeline** &mdash; Lightweight CSS and JavaScript bundles are loaded where needed.
@@ -26,6 +27,17 @@ Asset Listing Pro provides a complete workflow for capturing asset listings from
 |-----------|-------------|
 | `[acl_listing_submission_form]` | Displays the seller-facing submission form. Requires the visitor to be logged in with a role capable of editing posts. |
 | `[acl_seller_dashboard]` | Outputs a table of the current user’s submissions, including commission status. |
+
+## Asset Type Metadata
+
+The submission form exposes additional required fields whenever the seller selects a supported asset type. The collected values are saved as post meta and surfaced in the REST API for integrations.
+
+| Asset Type | Fields | Meta Keys |
+|------------|--------|-----------|
+| Jets | Aircraft Model, Hours Flown | `_acl_listing_model`, `_acl_listing_hours` |
+| Yachts | Vessel Model, Length (ft) | `_acl_listing_model`, `_acl_listing_length` |
+| Mansions | Property Style | `_acl_listing_model` |
+| Jewellery | Carat Weight, Primary Gemstone | `_acl_listing_carats`, `_acl_listing_gemstone` |
 
 ## Commission Workflow
 

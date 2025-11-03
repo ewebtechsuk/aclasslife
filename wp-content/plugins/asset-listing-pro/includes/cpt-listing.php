@@ -93,3 +93,168 @@ function alp_register_asset_type_taxonomy() {
     register_taxonomy( 'asset_type', array( 'aclasslife_listing' ), $args );
 }
 add_action( 'init', 'alp_register_asset_type_taxonomy' );
+
+/**
+ * Determine if the current user can manage listing meta data.
+ *
+ * @return bool
+ */
+function alp_can_manage_listing_meta() {
+    return current_user_can( 'edit_posts' );
+}
+
+/**
+ * Sanitize text based listing meta values.
+ *
+ * @param mixed $value Raw value.
+ * @return string
+ */
+function alp_sanitize_listing_model_meta( $value ) {
+    return sanitize_text_field( (string) $value );
+}
+
+/**
+ * Normalize numeric strings into positive floating point values.
+ *
+ * @param mixed $value Raw value.
+ * @return float|null
+ */
+function alp_sanitize_listing_numeric_meta( $value ) {
+    if ( is_array( $value ) ) {
+        return null;
+    }
+
+    $value = trim( (string) $value );
+
+    if ( '' === $value ) {
+        return null;
+    }
+
+    $value = str_replace( ' ', '', $value );
+
+    if ( false !== strpos( $value, ',' ) && false !== strpos( $value, '.' ) ) {
+        $value = str_replace( ',', '', $value );
+    } elseif ( false !== strpos( $value, ',' ) ) {
+        $value = str_replace( ',', '.', $value );
+    }
+
+    if ( ! is_numeric( $value ) ) {
+        return null;
+    }
+
+    $number = (float) $value;
+
+    return $number >= 0 ? $number : null;
+}
+
+/**
+ * Sanitize flight hours meta values.
+ *
+ * @param mixed $value Raw value.
+ * @return float|null
+ */
+function alp_sanitize_listing_hours_meta( $value ) {
+    $sanitized = alp_sanitize_listing_numeric_meta( $value );
+
+    return null !== $sanitized ? round( $sanitized, 1 ) : null;
+}
+
+/**
+ * Sanitize vessel length meta values.
+ *
+ * @param mixed $value Raw value.
+ * @return float|null
+ */
+function alp_sanitize_listing_length_meta( $value ) {
+    $sanitized = alp_sanitize_listing_numeric_meta( $value );
+
+    return null !== $sanitized ? round( $sanitized, 2 ) : null;
+}
+
+/**
+ * Sanitize jewellery carat weight meta values.
+ *
+ * @param mixed $value Raw value.
+ * @return float|null
+ */
+function alp_sanitize_listing_carats_meta( $value ) {
+    $sanitized = alp_sanitize_listing_numeric_meta( $value );
+
+    return null !== $sanitized ? round( $sanitized, 2 ) : null;
+}
+
+/**
+ * Sanitize gemstone text meta values.
+ *
+ * @param mixed $value Raw value.
+ * @return string
+ */
+function alp_sanitize_listing_gemstone_meta( $value ) {
+    return sanitize_text_field( (string) $value );
+}
+
+/**
+ * Register asset type specific meta fields.
+ */
+function alp_register_asset_type_meta_fields() {
+    register_post_meta(
+        'aclasslife_listing',
+        '_acl_listing_model',
+        array(
+            'type'              => 'string',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'alp_sanitize_listing_model_meta',
+            'auth_callback'     => 'alp_can_manage_listing_meta',
+        )
+    );
+
+    register_post_meta(
+        'aclasslife_listing',
+        '_acl_listing_hours',
+        array(
+            'type'              => 'number',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'alp_sanitize_listing_hours_meta',
+            'auth_callback'     => 'alp_can_manage_listing_meta',
+        )
+    );
+
+    register_post_meta(
+        'aclasslife_listing',
+        '_acl_listing_length',
+        array(
+            'type'              => 'number',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'alp_sanitize_listing_length_meta',
+            'auth_callback'     => 'alp_can_manage_listing_meta',
+        )
+    );
+
+    register_post_meta(
+        'aclasslife_listing',
+        '_acl_listing_carats',
+        array(
+            'type'              => 'number',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'alp_sanitize_listing_carats_meta',
+            'auth_callback'     => 'alp_can_manage_listing_meta',
+        )
+    );
+
+    register_post_meta(
+        'aclasslife_listing',
+        '_acl_listing_gemstone',
+        array(
+            'type'              => 'string',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'alp_sanitize_listing_gemstone_meta',
+            'auth_callback'     => 'alp_can_manage_listing_meta',
+        )
+    );
+}
+add_action( 'init', 'alp_register_asset_type_meta_fields' );
