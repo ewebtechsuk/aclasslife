@@ -41,6 +41,7 @@ class Asset_Listing_Pro {
     public function __construct() {
         add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
         add_action( 'init', array( $this, 'register_meta_fields' ) );
+        add_action( 'init', array( $this, 'register_shortcodes' ) );
         add_action( 'admin_menu', array( $this, 'register_admin_menus' ) );
         add_action( 'admin_post_acl_update_commission_status', array( $this, 'handle_commission_status_update' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
@@ -136,19 +137,87 @@ class Asset_Listing_Pro {
             return $content;
         }
 
-        $base_offer_url = apply_filters( 'alp_make_offer_base_url', trailingslashit( home_url( 'make-offer' ) ), $listing_id );
+        $button_markup = $this->get_make_offer_button_markup( $listing_id );
 
-        if ( empty( $base_offer_url ) ) {
+        if ( '' === $button_markup ) {
             return $content;
         }
 
-        $query_args = apply_filters(
-            'alp_make_offer_query_args',
-            array( 'listing_id' => $listing_id ),
-            $listing_id
+        return $content . $button_markup;
+    }
+
+    /**
+     * Register shortcodes exposed by the plugin.
+     */
+    public function register_shortcodes() {
+        add_shortcode( 'alp_make_offer_button', array( $this, 'render_make_offer_button_shortcode' ) );
+    }
+
+    /**
+     * Render the Make Offer button shortcode.
+     *
+     * @param array  $atts    Shortcode attributes.
+     * @param string $content Enclosed content.
+     * @return string
+     */
+    public function render_make_offer_button_shortcode( $atts, $content = '' ) {
+        $atts = shortcode_atts(
+            array(
+                'listing_id' => 0,
+            ),
+            $atts,
+            'alp_make_offer_button'
         );
 
-        $offer_url = add_query_arg( $query_args, $base_offer_url );
+        $listing_id = absint( $atts['listing_id'] );
+
+        if ( ! $listing_id ) {
+            $listing_id = get_the_ID();
+        }
+
+        if ( ! $listing_id ) {
+            return '';
+        }
+
+        $markup = $this->get_make_offer_button_markup( $listing_id );
+
+        return '' !== $markup ? wp_kses_post( $markup ) : '';
+    }
+
+    /**
+     * Generate the Make Offer button markup for a listing.
+     *
+     * @param int $listing_id Listing identifier.
+     * @return string
+     */
+    private function get_make_offer_button_markup( $listing_id ) {
+        $listing_id = absint( $listing_id );
+
+        if ( ! $listing_id ) {
+            return '';
+        }
+
+        $base_offer_url = apply_filters( 'alp_make_offer_base_url', trailingslashit( home_url( 'make-offer' ) ), $listing_id );
+
+        if ( empty( $base_offer_url ) ) {
+            return '';
+        }
+
+        $default_query_args = array( 'listing_id' => $listing_id );
+
+        $query_args = apply_filters( 'alp_make_offer_query_args', $default_query_args, $listing_id );
+
+        if ( ! is_array( $query_args ) || empty( $query_args ) ) {
+            $query_args = $default_query_args;
+        }
+
+        $sanitized_args = array();
+
+        foreach ( $query_args as $key => $value ) {
+            $sanitized_args[ sanitize_key( $key ) ] = is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
+        }
+
+        $offer_url = add_query_arg( $sanitized_args, $base_offer_url );
 
         $button_markup = sprintf(
             '<div class="alp-make-offer"><a class="make-offer-btn" href="%1$s">%2$s</a></div>',
@@ -156,9 +225,7 @@ class Asset_Listing_Pro {
             esc_html__( 'Make an Offer', 'asset-listing-pro' )
         );
 
-        $button_markup = apply_filters( 'alp_make_offer_button_markup', $button_markup, $offer_url, $listing_id );
-
-        return $content . $button_markup;
+        return apply_filters( 'alp_make_offer_button_markup', $button_markup, $offer_url, $listing_id );
     }
 
     /**
