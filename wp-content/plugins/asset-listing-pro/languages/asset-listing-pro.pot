@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Asset Listing Pro 1.0.0\n"
+"Report-Msgid-Bugs-To: https://aclasslife.com\n"
+"POT-Creation-Date: 2024-05-09 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: ChatGPT\n"
+"X-Domain: asset-listing-pro\n"
+
+#: asset-listing-pro.php:58
+msgid "Asset Listings"
+msgstr ""
+
+#: asset-listing-pro.php:119
+msgid "Asset Listing Overview"
+msgstr ""
+
+#: asset-listing-pro.php:136
+msgid "Commission Revenue"
+msgstr ""
+
+#: asset-listing-pro.php:176
+msgid "Seller Dashboard"
+msgstr ""
+
+#: asset-listing-pro.php:214
+msgid "Commission Workflow"
+msgstr ""
+
+#: asset-listing-pro.php:362
+msgid "Commission status updated."
+msgstr ""
+
+#: asset-listing-pro.php:365
+msgid "Unable to update commission status. Please try again."
+msgstr ""
+
+#: includes/frontend-submission.php:111
+msgid "Enter a valid price for the listing."
+msgstr ""
+
+#: includes/frontend-submission.php:147
+msgid "Thank you! Your listing has been submitted for review."
+msgstr ""
+
+#: includes/frontend-submission.php:204
+msgid "Please log in to submit a new asset listing."
+msgstr ""
+
+#: includes/frontend-submission.php:273
+msgid "Listing Image"
+msgstr ""
+
+#: includes/frontend-submission.php:302
+msgid "You have not submitted any listings yet."
+msgstr ""

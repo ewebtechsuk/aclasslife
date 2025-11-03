@@ -1,0 +1,95 @@
+.alp-submission-form {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.alp-submission-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.alp-submission-form input[type="text"],
+.alp-submission-form input[type="number"],
+.alp-submission-form textarea,
+.alp-submission-form select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.alp-submission-form input[type="file"] {
+    margin-bottom: 1rem;
+}
+
+.alp-button {
+    background-color: #0073aa;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.alp-button:hover {
+    background-color: #006799;
+}
+
+.alp-alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.alp-alert-error {
+    background: #fdecea;
+    color: #611a15;
+    border: 1px solid #f5c6cb;
+}
+
+.alp-alert-success {
+    background: #edf7ed;
+    color: #205522;
+    border: 1px solid #c3e6cb;
+}
+
+.alp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.alp-table th,
+.alp-table td {
+    border: 1px solid #e0e0e0;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.alp-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.alp-card {
+    padding: 1.25rem;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.alp-seller-dashboard {
+    margin: 2rem 0;
+}
