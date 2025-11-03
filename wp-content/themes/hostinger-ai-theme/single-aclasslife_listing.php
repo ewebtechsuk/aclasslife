@@ -84,27 +84,29 @@ $gallery    = alp_gallery_ids();
 ?>
 <main id="primary" class="alp-single-listing">
 
-    <section class="alp-hero container">
-        <div class="alp-breadcrumbs">
-            <a href="<?php echo esc_url(home_url('/')); ?>">Home</a><span>›</span>
-            <a href="<?php echo esc_url( get_post_type_archive_link('aclasslife_listing') ); ?>">Asset Listings</a><span>›</span>
-            <span><?php the_title(); ?></span>
-        </div>
+    <section class="alp-hero container" style="background:url('<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>') center/cover no-repeat; color:#fff;">
+        <div class="alp-hero-overlay" style="background:rgba(0,0,0,0.45); padding:80px 0;">
+            <div class="alp-breadcrumbs">
+                <a href="<?php echo esc_url(home_url('/')); ?>">Home</a><span>›</span>
+                <a href="<?php echo esc_url( get_post_type_archive_link('aclasslife_listing') ); ?>">Asset Listings</a><span>›</span>
+                <span><?php the_title(); ?></span>
+            </div>
 
-        <h1 class="alp-title"><?php the_title(); ?></h1>
+            <h1 class="alp-title"><?php the_title(); ?></h1>
 
-        <div class="alp-hero-meta">
-            <?php if ($price_raw): ?><div class="alp-price"><?php echo esc_html($price_raw); ?></div><?php endif; ?>
-            <?php if ($location): ?><div class="alp-location"><?php echo esc_html($location); ?></div><?php endif; ?>
-            <?php if ($status): ?><span class="alp-badge"><?php echo esc_html($status); ?></span><?php endif; ?>
-        </div>
+            <div class="alp-hero-meta">
+                <?php if ($price_raw): ?><div class="alp-price"><?php echo esc_html($price_raw); ?></div><?php endif; ?>
+                <?php if ($location): ?><div class="alp-location"><?php echo esc_html($location); ?></div><?php endif; ?>
+                <?php if ($status): ?><span class="alp-badge"><?php echo esc_html($status); ?></span><?php endif; ?>
+            </div>
 
-        <?php echo alp_term_badges('asset_type'); ?>
+            <?php echo alp_term_badges('asset_type'); ?>
 
-        <div class="alp-cta-row">
-            <?php echo do_shortcode('[alp_make_offer_button]'); ?>
-            <?php if ($phone): ?><a class="alp-btn-outline" href="tel:<?php echo esc_attr(preg_replace('/\D+/', '', $phone)); ?>">Call agent</a><?php endif; ?>
-            <a class="alp-btn-outline" href="#alp-book-viewing">Schedule viewing</a>
+            <div class="alp-cta-row">
+                <?php echo do_shortcode('[alp_make_offer_button]'); ?>
+                <?php if ($phone): ?><a class="alp-btn-outline" href="tel:<?php echo esc_attr(preg_replace('/\D+/', '', $phone)); ?>">Call agent</a><?php endif; ?>
+                <a class="alp-btn-outline" href="#alp-book-viewing">Schedule viewing</a>
+            </div>
         </div>
     </section>
 
