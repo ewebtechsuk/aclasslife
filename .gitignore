@@ -1,0 +1,6 @@
+# Ignore uploads, cache, environment files
+uploads/
+cache/
+.env
+node_modules/
+vendor/
