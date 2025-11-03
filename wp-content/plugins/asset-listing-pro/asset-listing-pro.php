@@ -47,6 +47,7 @@ class Asset_Listing_Pro {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
         add_action( 'admin_notices', array( $this, 'render_admin_notices' ) );
         add_filter( 'alp_format_price', array( $this, 'filter_format_price' ), 10, 2 );
+        add_filter( 'the_content', array( $this, 'append_make_offer_button' ) );
     }
 
     /**
@@ -116,6 +117,48 @@ class Asset_Listing_Pro {
     public function sanitize_price_meta( $value ) {
         $value = is_scalar( $value ) ? (float) $value : 0;
         return round( $value, 2 );
+    }
+
+    /**
+     * Append the "Make an Offer" button to single listing content.
+     *
+     * @param string $content Post content.
+     * @return string
+     */
+    public function append_make_offer_button( $content ) {
+        if ( ! is_singular( 'aclasslife_listing' ) || ! in_the_loop() || ! is_main_query() ) {
+            return $content;
+        }
+
+        $listing_id = get_the_ID();
+
+        if ( ! $listing_id ) {
+            return $content;
+        }
+
+        $base_offer_url = apply_filters( 'alp_make_offer_base_url', trailingslashit( home_url( 'make-offer' ) ), $listing_id );
+
+        if ( empty( $base_offer_url ) ) {
+            return $content;
+        }
+
+        $query_args = apply_filters(
+            'alp_make_offer_query_args',
+            array( 'listing_id' => $listing_id ),
+            $listing_id
+        );
+
+        $offer_url = add_query_arg( $query_args, $base_offer_url );
+
+        $button_markup = sprintf(
+            '<div class="alp-make-offer"><a class="make-offer-btn" href="%1$s">%2$s</a></div>',
+            esc_url( $offer_url ),
+            esc_html__( 'Make an Offer', 'asset-listing-pro' )
+        );
+
+        $button_markup = apply_filters( 'alp_make_offer_button_markup', $button_markup, $offer_url, $listing_id );
+
+        return $content . $button_markup;
     }
 
     /**
