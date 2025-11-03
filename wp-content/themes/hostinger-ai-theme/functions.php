@@ -4,6 +4,18 @@ if ( ! defined( 'HOSTINGER_AI_WEBSITES_THEME_PATH' ) ) {
     define( 'HOSTINGER_AI_WEBSITES_THEME_PATH', get_stylesheet_directory()  );
 }
 
+add_action( 'wp_enqueue_scripts', function () {
+    $css_relative_path = 'asset-listing-pro/assets/css/asset-listing-pro.css';
+    $css_file          = WP_PLUGIN_DIR . $css_relative_path;
+
+    wp_enqueue_style(
+        'asset-listing-pro',
+        plugins_url( $css_relative_path ),
+        [],
+        file_exists( $css_file ) ? filemtime( $css_file ) : null
+    );
+}, 99 );
+
 if ( ! defined( 'HOSTINGER_AI_WEBSITES_ASSETS_URL' ) ) {
     define( 'HOSTINGER_AI_WEBSITES_ASSETS_URL', get_stylesheet_directory_uri() . '/assets' );
 }

@@ -200,3 +200,64 @@
 .alp-related-meta{display:flex;justify-content:space-between;color:var(--c-muted);font-size:.9rem;margin:0 .8rem 1rem}
 .alp-book .wpcf7 form{display:grid;gap:10px}
 
+/* --- Visual Polish Upgrade --- */
+.alp-single-listing {
+  font-family: "Poppins", "Helvetica Neue", sans-serif;
+  background-color: #f8f8f9;
+  color: #1a1a1a;
+}
+
+.alp-hero {
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.alp-title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  text-transform: capitalize;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.alp-price {
+  color: #111;
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #111827, #4b5563);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.alp-media-grid img {
+  border-radius: 12px;
+  transition: transform .3s ease;
+}
+.alp-media-grid img:hover {
+  transform: scale(1.04);
+}
+
+.alp-card {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.alp-btn-secondary {
+  background: linear-gradient(90deg, #0f172a, #334155);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  transition: background .3s ease;
+}
+.alp-btn-secondary:hover {
+  background: linear-gradient(90deg, #1e293b, #475569);
+}
+
+.alp-related-card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.alp-related-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
