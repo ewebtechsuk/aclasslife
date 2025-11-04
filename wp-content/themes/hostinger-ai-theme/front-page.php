@@ -10,15 +10,15 @@ get_header();
 
 <!-- Hero Section -->
 <section class="homepage-hero">
-    <div class="hero-background">
-        <!-- you may replace with a video background or large image -->
-        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/hero-luxury.jpg' ) ); ?>" alt="Luxury supercar, yacht &amp; private jet">
+    <div class="hero-media" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1518552781905-280ee7f1e1fd?auto=format&fit=crop&w=1920&q=80" alt="Glistening supercar parked beside a private jet on the runway">
+        <span class="hero-overlay"></span>
     </div>
-    <div class="hero-content">
-        <div class="hero-text">
-            <h1>Experience Luxury Above &amp; Beyond</h1>
-            <p>Supercars • Private Jets • Luxury Yachts – Curated for the Elite</p>
-            <a href="<?php echo esc_url( site_url( '/inventory' ) ); ?>" class="button hero-cta">View Exclusive Fleet</a>
+    <div class="container hero-container">
+        <div class="hero-content">
+            <h1>Elevate Your Lifestyle. Beyond Limitation.</h1>
+            <p class="hero-subheadline">Supercars · Private Jets · Luxury Yachts — Crafted For The Connoisseur.</p>
+            <a href="<?php echo esc_url( site_url( '/inventory' ) ); ?>" class="button hero-cta">Explore Our Elite Fleet</a>
         </div>
     </div>
 </section>
@@ -26,26 +26,32 @@ get_header();
 <!-- Services / What We Offer -->
 <section class="homepage-services">
     <div class="container">
-        <h2>What We Offer</h2>
+        <h2 class="section-title">What We Offer</h2>
         <div class="services-grid">
             <!-- Service 1 -->
-            <div class="service-item">
-                <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/service-supercars.jpg' ) ); ?>" alt="Supercars">
-                <h3>Supercars</h3>
-                <p>Access the world’s most iconic and rare supercars, privately brokered and delivered.</p>
-            </div>
+            <article class="service-item">
+                <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80" alt="Supercars" loading="lazy">
+                <div class="service-copy">
+                    <h3>Supercars</h3>
+                    <p>Indulge in rare hypercars and bespoke configurations curated from the world’s most sought-after marques. From acquisition to discreet delivery, every detail is handled with precision.</p>
+                </div>
+            </article>
             <!-- Service 2 -->
-            <div class="service-item">
-                <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/service-private-jets.jpg' ) ); ?>" alt="Private Jets">
-                <h3>Private Jets</h3>
-                <p>Charter or purchase private jets with full service for global travel without compromise.</p>
-            </div>
+            <article class="service-item">
+                <img src="https://images.unsplash.com/photo-1506368083636-6defb67639d8?auto=format&fit=crop&w=900&q=80" alt="Private Jets" loading="lazy">
+                <div class="service-copy">
+                    <h3>Private Jets</h3>
+                    <p>Secure intercontinental travel with tailored jet charters and aircraft management crafted to your itinerary. Our aviation team orchestrates every journey for absolute ease and privacy.</p>
+                </div>
+            </article>
             <!-- Service 3 -->
-            <div class="service-item">
-                <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/service-yachts.jpg' ) ); ?>" alt="Luxury Yachts">
-                <h3>Luxury Yachts</h3>
-                <p>Explore the finest yachts in the world, tailored charters and exclusive sales.</p>
-            </div>
+            <article class="service-item">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Luxury Yachts" loading="lazy">
+                <div class="service-copy">
+                    <h3>Luxury Yachts</h3>
+                    <p>Sail iconic coastlines aboard superyachts matched to your lifestyle and crew preferences. Bespoke itineraries, concierge provisioning, and acquisition advisory create unforgettable voyages.</p>
+                </div>
+            </article>
         </div>
     </div>
 </section>
@@ -87,8 +93,8 @@ get_header();
             }
 
             echo '</div>';
-            wp_reset_postdata();
         }
+        wp_reset_postdata();
         ?>
         <a href="<?php echo esc_url( site_url( '/inventory' ) ); ?>" class="button fleet-cta">See Full Fleet</a>
     </div>
@@ -98,15 +104,35 @@ get_header();
 <section class="homepage-testimonials">
     <div class="container">
         <h2>What Our Clients Say</h2>
-        <div class="testimonials-slider">
-            <blockquote>
-                <p>“A Class Life handled everything—jet, yacht, supercar—all in one seamless experience.”</p>
-                <footer>&mdash; London Capital Investments, UK</footer>
-            </blockquote>
-            <blockquote>
-                <p>“The fleet and service were world-class. We were able to pick our jet and car in days.”</p>
-                <footer>&mdash; Spear Removals Ltd., UAE</footer>
-            </blockquote>
+        <div class="testimonials-grid">
+            <article class="testimonial">
+                <blockquote>
+                    <p>“A Class Life orchestrated our Monaco weekend with unparalleled finesse—from the Gulfstream arrival to the keys of a limited-production coupé.”</p>
+                </blockquote>
+                <footer>
+                    <div class="testimonial-client">
+                        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/testimonials/man-3.jpg' ) ); ?>" alt="Portrait of Oliver Hart from London" loading="lazy">
+                        <div>
+                            <strong>Oliver Hart</strong>
+                            <span>London Capital Investments · UK</span>
+                        </div>
+                    </div>
+                </footer>
+            </article>
+            <article class="testimonial">
+                <blockquote>
+                    <p>“Their team curated a seamless Mediterranean voyage—chartered jet, villa arrival, and a yacht that exceeded every expectation.”</p>
+                </blockquote>
+                <footer>
+                    <div class="testimonial-client">
+                        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/testimonials/woman-5.jpg' ) ); ?>" alt="Portrait of Layla Al Maktoum from Dubai" loading="lazy">
+                        <div>
+                            <strong>Layla Al Maktoum</strong>
+                            <span>Azure Holdings · UAE</span>
+                        </div>
+                    </div>
+                </footer>
+            </article>
         </div>
     </div>
 </section>
@@ -116,7 +142,7 @@ get_header();
     <div class="container">
         <h2>Ready to Experience the Extraordinary?</h2>
         <p>Contact us today and let us tailor the perfect luxury solution for you.</p>
-        <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>" class="button button-invert">Get In Touch</a>
+        <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>" class="button button-gold">Get In Touch</a>
     </div>
 </section>
 
