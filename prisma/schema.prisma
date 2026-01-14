@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+  VENDOR
+  BUYER
+}
+
+enum ListingStatus {
+  DRAFT
+  IN_REVIEW
+  LIVE
+  REJECTED
+}
+
+enum ListingMode {
+  ENQUIRE
+  RESERVE
+}
+
+enum DealStage {
+  LEAD
+  QUALIFIED
+  NEGOTIATION
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+enum OrderStatus {
+  REQUIRES_PAYMENT
+  PAID
+  CANCELLED
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  passwordHash String
+  role         Role
+  profile      Profile?
+  vendor       VendorAccount?
+  buyer        BuyerAccount?
+  messages     Message[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Profile {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  fullName  String?
+  phone     String?
+  user      User    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VendorAccount {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  companyName String
+  verified    Boolean   @default(false)
+  listings    Listing[]
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model BuyerAccount {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  preferredCurrency String?
+  deals            Deal[]
+  user             User     @relation(fields: [userId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Listing {
+  id          String        @id @default(cuid())
+  vendorId    String
+  title       String
+  category    String
+  description String?
+  status      ListingStatus @default(DRAFT)
+  mode        ListingMode   @default(ENQUIRE)
+  price       Decimal?
+  vendor      VendorAccount @relation(fields: [vendorId], references: [id])
+  media       ListingMedia[]
+  deals       Deal[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model ListingMedia {
+  id        String   @id @default(cuid())
+  listingId String
+  url       String
+  sortOrder Int      @default(0)
+  listing   Listing  @relation(fields: [listingId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Deal {
+  id         String      @id @default(cuid())
+  listingId  String
+  buyerId    String
+  stage      DealStage   @default(LEAD)
+  listing    Listing     @relation(fields: [listingId], references: [id])
+  buyer      BuyerAccount @relation(fields: [buyerId], references: [id])
+  thread     Thread?
+  offers     Offer[]
+  order      Order?
+  notes      DealNote[]
+  tasks      DealTask[]
+  commission Commission?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Thread {
+  id     String    @id @default(cuid())
+  dealId String    @unique
+  deal   Deal      @relation(fields: [dealId], references: [id])
+  messages Message[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  threadId  String
+  senderId  String
+  content   String
+  thread    Thread   @relation(fields: [threadId], references: [id])
+  sender    User     @relation(fields: [senderId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Offer {
+  id        String   @id @default(cuid())
+  dealId    String
+  amount    Decimal
+  status    String
+  deal      Deal     @relation(fields: [dealId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  dealId    String      @unique
+  amount    Decimal
+  currency  String
+  status    OrderStatus @default(REQUIRES_PAYMENT)
+  deal      Deal        @relation(fields: [dealId], references: [id])
+  createdAt DateTime    @default(now())
+}
+
+model CommissionRule {
+  id          String   @id @default(cuid())
+  category    String
+  ratePercent Decimal
+  minimumFee  Decimal?
+  active      Boolean  @default(true)
+  commissions Commission[]
+  createdAt   DateTime @default(now())
+}
+
+model Commission {
+  id        String          @id @default(cuid())
+  dealId    String          @unique
+  ruleId    String
+  amount    Decimal
+  deal      Deal            @relation(fields: [dealId], references: [id])
+  rule      CommissionRule  @relation(fields: [ruleId], references: [id])
+  createdAt DateTime        @default(now())
+}
+
+model DealNote {
+  id        String   @id @default(cuid())
+  dealId    String
+  body      String
+  createdBy String
+  deal      Deal     @relation(fields: [dealId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model DealTask {
+  id          String   @id @default(cuid())
+  dealId      String
+  title       String
+  dueAt       DateTime?
+  completedAt DateTime?
+  deal        Deal     @relation(fields: [dealId], references: [id])
+  createdAt   DateTime @default(now())
+}

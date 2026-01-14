@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: aclasslife
+      POSTGRES_USER: aclasslife
+      POSTGRES_PASSWORD: change_me
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ../../apps/api
+    environment:
+      DATABASE_URL: postgresql://aclasslife:change_me@postgres:5432/aclasslife
+      PORT: 4000
+    depends_on:
+      - postgres
+    ports:
+      - "4000:4000"
+
+  web:
+    build:
+      context: ../../apps/web
+    ports:
+      - "3000:3000"
+
+  portal:
+    build:
+      context: ../../apps/portal
+    ports:
+      - "3001:3001"
+
+  admin:
+    build:
+      context: ../../apps/admin
+    ports:
+      - "3002:3002"
+
+  nginx:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+      - portal
+      - admin
+      - api
+    ports:
+      - "8080:8080"
+
+volumes:
+  pg_data:
